@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raju Narayan Hembram | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --surface: #1e1e2e;
+    --surface2: #252535;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #f0eeff;
+    --text2: #a09ab8;
+    --text3: #6b6485;
+    --accent: #7c6af7;
+    --accent2: #a98fff;
+    --accent3: #c4b5fd;
+    --glow: rgba(124,106,247,0.15);
+    --tag-bg: rgba(124,106,247,0.12);
+    --tag-text: #c4b5fd;
+  }
+  [data-theme="light"] {
+    --bg: #f7f6ff;
+    --bg2: #eeecff;
+    --bg3: #e8e5ff;
+    --surface: #ffffff;
+    --surface2: #f0eeff;
+    --border: rgba(100,80,220,0.1);
+    --border2: rgba(100,80,220,0.2);
+    --text: #1a1535;
+    --text2: #4a4270;
+    --text3: #8075a8;
+    --accent: #5a44e8;
+    --accent2: #7c6af7;
+    --accent3: #9080ff;
+    --glow: rgba(90,68,232,0.08);
+    --tag-bg: rgba(90,68,232,0.08);
+    --tag-text: #5a44e8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.35s, color 0.35s;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(10,10,15,0.75);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.35s, border-color 0.35s;
+  }
+  [data-theme="light"] nav { background: rgba(247,246,255,0.8); }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--accent2);
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; text-decoration: none;
+    color: var(--text2); letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+  .toggle-btn {
+    background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: 50px; padding: 0.35rem 0.85rem;
+    cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
+    color: var(--text2); font-size: 0.8rem; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .toggle-btn:hover { border-color: var(--accent); color: var(--accent2); }
+  .toggle-icon { font-size: 0.95rem; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 70% 40%, var(--glow), transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 60% 40%, black 20%, transparent 70%);
+  }
+  .hero-inner { max-width: 900px; position: relative; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--tag-bg); border: 1px solid var(--border2);
+    border-radius: 50px; padding: 0.35rem 1rem;
+    font-size: 0.78rem; font-weight: 500; color: var(--tag-text);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 span { color: var(--accent2); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--text2); font-weight: 300;
+    max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 8px;
+    padding: 0.75rem 1.8rem; font-size: 0.9rem; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border2); border-radius: 8px;
+    padding: 0.75rem 1.8rem; font-size: 0.9rem; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+  .hero-scroll {
+    margin-top: 4rem; display: flex; align-items: center; gap: 0.8rem;
+    color: var(--text3); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .scroll-line { width: 40px; height: 1px; background: var(--text3); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2.5rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.73rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -1px;
+    margin-bottom: 3rem; color: var(--text);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+  }
+  .about-bio { font-size: 1rem; color: var(--text2); line-height: 1.8; }
+  .about-bio p + p { margin-top: 1rem; }
+  .about-details { display: flex; flex-direction: column; gap: 1rem; }
+  .detail-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .detail-card:hover { border-color: var(--border2); }
+  .detail-label { font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .detail-value { font-size: 0.92rem; color: var(--text); font-weight: 400; }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
+    align-items: start;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+  }
+  .edu-card:hover { border-color: var(--border2); }
+  .edu-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--tag-bg); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .edu-uni { color: var(--text2); font-size: 0.9rem; margin-bottom: 0.8rem; }
+  .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .badge {
+    font-size: 0.73rem; font-weight: 500; padding: 0.28rem 0.7rem;
+    border-radius: 50px; letter-spacing: 0.04em;
+  }
+  .badge-year { background: var(--tag-bg); color: var(--tag-text); border: 1px solid var(--border2); }
+  .badge-status { background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem 1.2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .skill-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+  .skill-desc { font-size: 0.8rem; color: var(--text3); line-height: 1.5; }
+
+  /* EXPERIENCE */
+  .exp-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem;
+    margin-bottom: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .exp-item:hover { border-color: var(--border2); }
+  .exp-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+  .exp-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; }
+
+  /* LANGUAGES & HOBBIES */
+  .tags-row { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1rem; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    border: 1px solid var(--border2);
+    border-radius: 50px; padding: 0.4rem 1rem;
+    font-size: 0.83rem; font-weight: 500;
+  }
+
+  /* TWO-COL SECTION */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .col-title {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem;
+    margin-bottom: 1rem; color: var(--text);
+  }
+
+  /* CONTACT */
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 3rem;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .contact-card::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--glow);
+  }
+  .contact-card h3 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 2rem; margin-bottom: 0.8rem; letter-spacing: -1px;
+  }
+  .contact-card p { color: var(--text2); margin-bottom: 2rem; font-size: 0.95rem; }
+  .contact-email {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--tag-bg); border: 1px solid var(--border2);
+    border-radius: 10px; padding: 0.9rem 1.6rem;
+    color: var(--tag-text); text-decoration: none; font-weight: 500;
+    font-size: 0.95rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-email:hover { border-color: var(--accent); background: rgba(124,106,247,0.18); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text3); font-size: 0.78rem; letter-spacing: 0.04em;
+  }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid, .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-card { padding: 2rem 1.2rem; }
+  }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RNH</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+    <span class="toggle-icon" id="themeIcon">☀️</span>
+    <span id="themeLabel">Light</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Open to Opportunities
+    </div>
+    <h1>Raju Narayan<br><span>Hembram</span></h1>
+    <p class="hero-sub">
+      M.Sc. Physics student at MSCBU with a passion for analytical thinking, problem-solving, and scientific exploration. Based in Baripada, Odisha.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#about" class="btn-ghost">Explore Portfolio</a>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+      Scroll to explore
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label fade-in">Who I Am</p>
+    <h2 class="section-title fade-in">About Me</h2>
+    <div class="about-grid">
+      <div class="about-bio fade-in">
+        <p>I am a dedicated and motivated M.Sc. Physics student in my first year at Maharaja Sriram Chandra Bhanja Deo University. I bring strong analytical abilities and a deep curiosity for understanding the physical world.</p>
+        <p>I am eager to begin my professional journey and contribute meaningfully to any organization — bringing with me a strong academic foundation, excellent communication skills, and a collaborative mindset.</p>
+        <p>Outside of academics, I enjoy playing cricket and watching movies, which keep me balanced and energized.</p>
+      </div>
+      <div class="about-details fade-in">
+        <div class="detail-card">
+          <div class="detail-label">Date of Birth</div>
+          <div class="detail-value">12 March 2005</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Location</div>
+          <div class="detail-value">Baripada, Odisha, India</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Email</div>
+          <div class="detail-value">rajunarayan526@gmail.com</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Languages</div>
+          <div class="detail-value">English · Hindi · Odia</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Status</div>
+          <div class="detail-value">Fresher · Actively Seeking Roles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label fade-in">Academic Background</p>
+    <h2 class="section-title fade-in">Education</h2>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Master of Science (M.Sc.) in Physics</div>
+        <div class="edu-uni">Maharaja Sriram Chandra Bhanja Deo University (MSCBU)</div>
+        <div class="edu-meta">
+          <span class="badge badge-year">2025 – 2027</span>
+          <span class="badge badge-status">● Pursuing · 1st Year</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label fade-in">What I Bring</p>
+    <h2 class="section-title fade-in">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <div class="skill-icon">⚛️</div>
+        <div class="skill-name">Physics Knowledge</div>
+        <div class="skill-desc">Strong conceptual foundation in core physics principles and theories.</div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🔍</div>
+        <div class="skill-name">Analytical Thinking</div>
+        <div class="skill-desc">Ability to break down complex problems and derive logical solutions.</div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">💻</div>
+        <div class="skill-name">Computer Skills</div>
+        <div class="skill-desc">Proficient in MS Word, Excel, and PowerPoint for productivity.</div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🗣️</div>
+        <div class="skill-name">Communication</div>
+        <div class="skill-desc">Effective communicator in English, Hindi, and Odia across contexts.</div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🤝</div>
+        <div class="skill-name">Teamwork</div>
+        <div class="skill-desc">Collaborative team player with experience in academic group work.</div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">⏰</div>
+        <div class="skill-name">Time Management</div>
+        <div class="skill-desc">Organized and disciplined approach to meeting deadlines.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label fade-in">Track Record</p>
+    <h2 class="section-title fade-in">Experience</h2>
+    <div class="exp-item fade-in">
+      <div class="exp-title">🔬 Laboratory Practice</div>
+      <div class="exp-desc">Conducted physics experiments in academic laboratory settings, developing hands-on scientific skills, precision in measurement, and data analysis.</div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-title">🎙️ Seminars & Academic Events</div>
+      <div class="exp-desc">Actively participated in academic seminars, workshops, and university events, enhancing both subject knowledge and professional presentation skills.</div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-title">📚 Currently Seeking</div>
+      <div class="exp-desc">As a fresher, I am actively looking for internships, research assistant roles, or entry-level positions where I can apply my physics background and grow professionally.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LANGUAGES & HOBBIES -->
+<section>
+  <div class="section-inner">
+    <div class="two-col">
+      <div class="fade-in">
+        <p class="section-label">Multilingual</p>
+        <div class="col-title">Languages</div>
+        <div class="tags-row">
+          <span class="tag">🇬🇧 English</span>
+          <span class="tag">🇮🇳 Hindi</span>
+          <span class="tag">🏛️ Odia</span>
+        </div>
+      </div>
+      <div class="fade-in">
+        <p class="section-label">Personal Interests</p>
+        <div class="col-title">Hobbies</div>
+        <div class="tags-row">
+          <span class="tag">🏏 Cricket</span>
+          <span class="tag">🎬 Movies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label fade-in" style="text-align:center">Let's Connect</p>
+    <h2 class="section-title fade-in" style="text-align:center; margin-bottom: 2rem;">Get in Touch</h2>
+    <div class="contact-card fade-in">
+      <h3>Open to Opportunities</h3>
+      <p>Whether it's a research role, internship, or an entry-level position — I'd love to hear from you.</p>
+      <a href="mailto:rajunarayan526@gmail.com" class="contact-email">
+        ✉️ rajunarayan526@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Raju Narayan Hembram · Baripada, Odisha, India</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+    document.getElementById('themeLabel').textContent = isDark ? 'Dark' : 'Light';
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
